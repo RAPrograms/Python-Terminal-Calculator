@@ -1,3 +1,5 @@
+from lib.solver import solve_formula
+from lib.parsers import parse
 import sys
 
 def get_inputted_equation():
@@ -10,4 +12,5 @@ def get_inputted_equation():
 
 if __name__ == "__main__":
     equation = get_inputted_equation()
-    print(equation)
+    problem, _, map = parse(equation)
+    print(solve_formula(problem, map))

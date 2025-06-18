@@ -1,3 +1,4 @@
+from lib.enums import Operators
 from lib import parsers
 
 class TestNumberParser:
@@ -13,9 +14,33 @@ class TestNumberParser:
     def test_percentage_number(self):
         assert parsers.number("20%") == (0.2, 3)
 
-    def test_non_starting_number(self):
+    def test_invalid_start(self):
         assert parsers.number("a1") == None
         assert parsers.number("apple112213") == None
 
-    def test_number_cut(self):
+    def test_invalid_end(self):
         assert parsers.number("123apple") == (123, 3)
+
+
+class TestOperatorParser:
+    def test_power(self):
+        assert parsers.operator("**") == (Operators.power, 2)
+        assert parsers.operator("^") == (Operators.power, 1)
+
+    def test_multiplication(self):
+        assert parsers.operator("*") == (Operators.multiplication, 1)
+    
+    def test_devision(self):
+        assert parsers.operator("/") == (Operators.devision, 1)
+    
+    def test_addition(self):
+        assert parsers.operator("+") == (Operators.addition, 1)
+    
+    def test_subtraction(self):
+        assert parsers.operator("-") == (Operators.subtraction, 1)
+    
+    def test_invalid_start(self):
+        assert parsers.operator("s-") == None
+
+    def test_invalid_end(self):
+        assert parsers.operator("-o") == (Operators.subtraction, 1)

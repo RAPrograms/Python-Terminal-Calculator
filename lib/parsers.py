@@ -28,7 +28,7 @@ def number(equation: str, start: int = 0) -> tuple[float, int] | None:
     return (numb, length)
 
 
-def operator(equation: str, start: int = 0) -> tuple[list[Any], int]:
+def operator(equation: str, start: int = 0) -> tuple[Operators, int]:
     match(equation[start]):
         case "^":
             return (Operators.power, 1)

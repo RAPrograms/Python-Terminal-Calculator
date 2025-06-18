@@ -26,4 +26,4 @@ A basic calculator which solves equations in the terminal
 ##  Mathematical Constants
 | Symbol | Description                         | Implimented |
 | ------ | ----------------------------------- | ----------- |
-| pi     | Circle circumference/diameter ratio | No.         |
+| pi     | Circle circumference/diameter ratio | Yes         |

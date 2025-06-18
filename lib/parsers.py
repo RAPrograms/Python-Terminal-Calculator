@@ -1,4 +1,5 @@
 from .enums import Operators
+from math import pi as PI
 from typing import Any
 
 def number(equation: str, start: int = 0) -> tuple[float, int] | None:
@@ -50,6 +51,9 @@ def operator(equation: str, start: int = 0) -> tuple[Operators, int]:
         case _:
             return None
         
+def constant(equation: str, start: int = 0) -> tuple[Any, int]:
+    if(equation[start:start+2].lower() == "pi"):
+        return (PI, 2)
 
 
 def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list[int]]]:
@@ -94,7 +98,15 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
             output.append(operator_results[0])
             continue
 
+
+        constant_results = constant(equation, i)
+        if(constant_results):
+            i += constant_results[1]
+            output.append(constant_results[0])
+            continue
+
         i+= 1
 
+    print(output)
     return (output, i - start, map)
 

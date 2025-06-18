@@ -1,4 +1,5 @@
 from lib.enums import Operators
+from math import pi as PI
 from lib import parsers
 
 class TestNumberParser:
@@ -44,3 +45,8 @@ class TestOperatorParser:
 
     def test_invalid_end(self):
         assert parsers.operator("-o") == (Operators.subtraction, 1)
+
+
+class TestConstantParser:
+    def test_pi(self):
+        assert parsers.constant("pi") == (PI, 2)

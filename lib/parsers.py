@@ -76,7 +76,7 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
 
         if(char == "("):
             data, length, sub_map = parse(equation, i+1)
-            i+= length + 1
+            i+= length + 2
             output.append((data, sub_map))
             map["()"].append(len(output) - 1)
             continue

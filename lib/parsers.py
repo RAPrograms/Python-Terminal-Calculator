@@ -1,4 +1,4 @@
-from lib.enums import Operators
+
 from math import pi as PI
 from typing import Any
 
@@ -28,26 +28,16 @@ def number(equation: str, start: int = 0) -> tuple[float, int] | None:
 
 
 def operator(equation: str, start: int = 0) -> tuple[str, int]:
-    match(equation[start]):
-        case "^":
-            return (Operators.exponent, 1)
-
-        case "+":
-            return (Operators.addition, 1)
-
-        case "-":
-            return (Operators.subtraction, 1)
-
-        case "/":
-            return (Operators.devision, 1)
-
-        case "*":
-            if(equation[start:start+2] == "**"):
-                return (Operators.exponent, 2)
-            return (Operators.multiplication, 1)
-       
-        case _:
-            return None
+    if equation[start] in ["^","+","-","/"]:
+        return (equation[start],1)
+    
+    elif equation[start] == "*":
+        if(equation[start:start+2] == "**"):
+            return ("^", 2)
+        return ("*", 1)
+    
+    else:
+        return None
         
 def constant(equation: str, start: int = 0) -> tuple[Any, int]:
     if(equation[start:start+2].lower() == "pi"):
@@ -58,11 +48,11 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
     assert start < len(equation), "Invalid Starting Index"
     output = []
     map = {
-        Operators.addition: [],
-        Operators.subtraction: [],
-        Operators.devision: [],
-        Operators.multiplication: [],
-        Operators.exponent: [],
+        "+": [],
+        "-": [],
+        "/": [],
+        "*": [],
+        "^": [],
         "()": []
     }
 
@@ -85,7 +75,7 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
             i += numb_results[1]
             output.append(numb_results[0])
             if(numb_results[0] < 0):
-                map[Operators.subtraction].append(len(output))
+                map["-"].append(len(output))
             continue
 
 

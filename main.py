@@ -15,8 +15,8 @@ def solve(equation):
 
 if __name__ == "__main__":
     
-    solve("((42-1*2)/(9.8+20%))*0.25")
-    solve("(2**2)^0.5")
-    solve("1")
-    #solve("0-1") CANNOT HANDLE NEGATIVE NUMBERS
+    solve("((42-1*2)/(9.8+20%))*0.25") #1
+    solve("(2**2)^0.5") #2
+    solve("1") #1
+    #solve("0-1") #CANNOT HANDLE NEGATIVE NUMBERS
     #solve(get_inputted_equation())

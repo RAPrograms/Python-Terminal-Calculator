@@ -1,4 +1,3 @@
-from .enums import Operators
 from typing import Any
 
 def get_neighbor(problem: list[Any], direction: int, start: int):
@@ -16,11 +15,11 @@ def solve_formula(problem: list[Any], map: dict[str, list[int]]):
         problem[pos] = solve_formula(sub_problem, sub_map)
 
     for operation, task in [
-        (Operators.exponent, lambda a,b: a**b,),
-        (Operators.devision, lambda a,b: a/b,),
-        (Operators.multiplication, lambda a,b: a*b,),
-        (Operators.addition, lambda a,b: a+b,),
-        (Operators.subtraction, lambda a,b: a-b)
+        ("^", lambda a,b: a**b,),
+        ("/", lambda a,b: a/b,),
+        ("*", lambda a,b: a*b,),
+        ("+", lambda a,b: a+b,),
+        ("-", lambda a,b: a-b)
     ]:
         for pos in map[operation]:
             left = get_neighbor(problem, -1, pos)

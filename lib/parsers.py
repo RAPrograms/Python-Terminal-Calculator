@@ -1,4 +1,4 @@
-from .enums import Operators
+from lib.enums import Operators
 from math import pi as PI
 from typing import Any
 
@@ -6,8 +6,7 @@ def number(equation: str, start: int = 0) -> tuple[float, int] | None:
     buffer = ""
     percentage = False
 
-    for i in range(start, len(equation)):
-        char = equation[i]
+    for char in equation[start:]:
         if(char == "%"):
             percentage = True
             break
@@ -16,23 +15,22 @@ def number(equation: str, start: int = 0) -> tuple[float, int] | None:
             break
 
         buffer += char
-
+    
     if(buffer == ""):
         return None
 
-    length = len(buffer)
     numb = float(buffer)
     if(percentage):
         numb /= 100
-        length += 1
+    length = len(buffer)
 
     return (numb, length)
 
 
-def operator(equation: str, start: int = 0) -> tuple[Operators, int]:
+def operator(equation: str, start: int = 0) -> tuple[str, int]:
     match(equation[start]):
         case "^":
-            return (Operators.power, 1)
+            return (Operators.exponent, 1)
 
         case "+":
             return (Operators.addition, 1)
@@ -45,7 +43,7 @@ def operator(equation: str, start: int = 0) -> tuple[Operators, int]:
 
         case "*":
             if(equation[start:start+2] == "**"):
-                return (Operators.power, 2)
+                return (Operators.exponent, 2)
             return (Operators.multiplication, 1)
        
         case _:
@@ -64,7 +62,7 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
         Operators.subtraction: [],
         Operators.devision: [],
         Operators.multiplication: [],
-        Operators.power: [],
+        Operators.exponent: [],
         "()": []
     }
 
@@ -107,6 +105,4 @@ def parse(equation: str, start: int = 0) -> tuple[list[Any], int, dict[str, list
 
         i+= 1
 
-    print(output)
     return (output, i - start, map)
-

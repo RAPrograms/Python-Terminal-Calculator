@@ -9,8 +9,14 @@ def get_inputted_equation():
     
     return result
 
-
-if __name__ == "__main__":
-    equation = get_inputted_equation()
+def solve(equation):
     problem, _, map = parse(equation)
     print(solve_formula(problem, map))
+
+if __name__ == "__main__":
+    
+    solve("((42-1*2)/(9.8+20%))*0.25")
+    solve("(2**2)^0.5")
+    solve("1")
+    #solve("0-1") CANNOT HANDLE NEGATIVE NUMBERS
+    #solve(get_inputted_equation())

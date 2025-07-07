@@ -16,7 +16,7 @@ def solve_formula(problem: list[Any], map: dict[str, list[int]]):
         problem[pos] = solve_formula(sub_problem, sub_map)
 
     for operation, task in [
-        (Operators.power, lambda a,b: a**b,),
+        (Operators.exponent, lambda a,b: a**b,),
         (Operators.devision, lambda a,b: a/b,),
         (Operators.multiplication, lambda a,b: a*b,),
         (Operators.addition, lambda a,b: a+b,),
